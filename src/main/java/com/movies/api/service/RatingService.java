@@ -1,6 +1,5 @@
 package com.movies.api.service;
 
-import com.movies.api.models.Movie;
 import com.movies.api.models.Rating;
 import com.movies.api.repositories.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
