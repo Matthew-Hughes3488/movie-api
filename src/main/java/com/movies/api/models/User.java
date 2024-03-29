@@ -23,6 +23,9 @@ public class User {
     @Column(name = "registration_date", nullable = false)
     private Date registrationDate;
 
+    public User() {
+    }
+
     public User(String username, String email, Date registrationDate) {
         this.username = username;
         this.email = email;
