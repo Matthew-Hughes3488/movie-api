@@ -1,7 +1,6 @@
 package com.movies.api.controllers;
 
 import com.movies.api.models.Movie;
-import com.movies.api.models.User;
 import com.movies.api.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
