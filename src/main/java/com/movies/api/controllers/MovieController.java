@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/movies")
@@ -22,10 +23,16 @@ public class MovieController {
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable("id") Long id){
-        return movieService.getMovieById(id)
-                .map(movie -> new ResponseEntity<>(movie, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public ResponseEntity<?> getMovieById(@PathVariable("id") Long id) {
+        Optional<Movie> optionalMovie = movieService.getMovieById(id);
+
+        if (optionalMovie.isPresent()) {
+            Movie movie = optionalMovie.get();
+            return ResponseEntity.ok(movie);
+        } else {
+            String errorMessage = "Movie not found with ID: " + id;
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+        }
     }
     @PostMapping
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie){
